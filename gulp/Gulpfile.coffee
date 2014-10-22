@@ -17,7 +17,8 @@ gulp.task "default", ->
 
 gulp.task "coffee", ->
   components = gulp.src(srcFiles).pipe( coffee(bare: true).on("error", gutil.log) ).pipe( gulp.dest("components/js/") )
-  tests = gulp.src(specFiles).pipe( coffee(bare: true).on("error", gutil.log) ).pipe( gulp.dest("spec/javascripts/") )
+  tests      = gulp.src(specFiles).pipe( coffee(bare: true).on("error", gutil.log) ).pipe( gulp.dest("spec/javascripts/") )
+  
   es.concat components, tests
 
 gulp.task "lint", ->
