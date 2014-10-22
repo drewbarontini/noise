@@ -1,4 +1,4 @@
-noise
+Noise
 =====
 
 Gulp/Grunt template files.
