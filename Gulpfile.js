@@ -47,13 +47,17 @@ var jsSpecFiles     = 'spec/javascripts/';
 var sassFiles       = 'stylesheets/*.sass';
 var cssFiles        = 'stylesheets';
 
+// ----- Watched Files ----- //
+
+var filesToWatch = [ sassFiles, coffeeFiles, coffeeSpecFiles ];
+
 // -------------------------------------
 //   Task: Default
 // -------------------------------------
 
 gulp.task( 'default', function() {
 
-  watch( [ sassFiles, coffeeFiles, coffeeSpecFiles ], function( files ) {
+  watch( filesToWatch, function( files ) {
 
     gulp.start( 'sass' );
     gulp.start( 'coffee' );
