@@ -88,6 +88,7 @@ gulp.task( 'lint', function () {
 
   gulp.src( options.coffee.files )
       .pipe( coffeelint( ) )
+      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( coffeelint.reporter( ) )
 
 } );
@@ -101,7 +102,9 @@ gulp.task( 'minify-css', function () {
 
   gulp.src( options.css.file )
       .pipe( minifycss() )
+      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( rename( { suffix: '.min' } ) )
+      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( gulp.dest( options.css.destination ) );
 
 } );
@@ -114,6 +117,7 @@ gulp.task( 'sass', function () {
 
   gulp.src( options.sass.files )
       .pipe( sass( { indentedSyntax: true } ) )
+      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( gulp.dest( options.sass.destination ) );
 
 } );
@@ -126,6 +130,7 @@ gulp.task( 'uglify', function () {
 
   gulp.src( options.js.file )
       .pipe( uglify() )
+      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( gulp.dest( options.js.destination ) );
 
 } );
