@@ -8,17 +8,17 @@
 //   Modules
 // -------------------------------------
 
-var gulp       = require( 'gulp' );
-var watch      = require( 'gulp-watch' );
-var coffee     = require( 'gulp-coffee' );
-var es         = require( 'event-stream' );
-var gutil      = require( 'gulp-util' );
-var coffeelint = require( 'gulp-coffeelint' );
-var minifycss  = require( 'gulp-minify-css' )
-var sass       = require( 'gulp-sass' );
+var gulp       = require( 'gulp' );            // all
+var watch      = require( 'gulp-watch' );      // all
+var coffee     = require( 'gulp-coffee' );     // coffee
+var coffeelint = require( 'gulp-coffeelint' ); // coffee
+var gutil      = require( 'gulp-util' );       // coffee
+var minifycss  = require( 'gulp-minify-css' )  // minify-css
+var rename     = require( 'rename' );          // minify-css
+var sass       = require( 'gulp-sass' );       // sass
 
 // -------------------------------------
-//   Variables
+//   Options
 // -------------------------------------
 
 var options = {
@@ -30,6 +30,7 @@ var options = {
 
   css : {
     files       : 'stylesheets/*.css',
+    file        : 'stylesheets/application.css',
     destination : 'stylesheets'
   },
 
@@ -54,33 +55,9 @@ gulp.task( 'default', function() {
 
     gulp.start( 'sass' );
     gulp.start( 'coffee' );
+    gulp.start( 'minify-css' );
 
   } );
-
-} );
-
-// -------------------------------------
-//   Task: Minify CSS
-// -------------------------------------
-
-
-gulp.task( 'minify-css', function () {
-
-  gulp.src( options.css.files )
-      .pipe( minifycss() )
-      .pipe( gulp.dest( options.css.destination ) );
-
-} );
-
-// -------------------------------------
-//   Task: Sass
-// -------------------------------------
-
-gulp.task( 'sass', function () {
-
-  gulp.src( options.sass.files )
-      .pipe( sass( { indentedSyntax: true } ) )
-      .pipe( gulp.dest( options.sass.destination ) );
 
 } );
 
@@ -105,5 +82,31 @@ gulp.task( 'lint', function () {
   gulp.src( options.coffee.files )
       .pipe( coffeelint( ) )
       .pipe( coffeelint.reporter( ) )
+
+} );
+    /
+// -------------------------------------
+//   Task: Minify CSS
+// -------------------------------------
+
+
+gulp.task( 'minify-css', function () {
+
+  gulp.src( options.css.file )
+      .pipe( minifycss() )
+      .pipe( rename( { suffix: '.min' } ) )
+      .pipe( gulp.dest( options.css.destination ) );
+
+} );
+
+// -------------------------------------
+//   Task: Sass
+// -------------------------------------
+
+gulp.task( 'sass', function () {
+
+  gulp.src( options.sass.files )
+      .pipe( sass( { indentedSyntax: true } ) )
+      .pipe( gulp.dest( options.sass.destination ) );
 
 } );
