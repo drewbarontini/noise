@@ -52,7 +52,7 @@ gulp.task( 'default', function() {
 gulp.task( 'minify-css', function () {
 
   gulp.src( cssFiles + '/*.css' )
-      .pipe( minifycss( { keepBreaks: true } ) )
+      .pipe( minifycss() )
       .pipe( gulp.dest( cssFiles ) );
 
 } );
