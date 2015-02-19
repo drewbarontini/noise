@@ -33,7 +33,7 @@ var cssFiles        = 'stylesheets';
 
 gulp.task( 'default', function() {
 
-  watch( [ sassFiles, coffeeFiles, coffeeSpecFiles ], function(files ) {
+  watch( [ sassFiles, coffeeFiles, coffeeSpecFiles ], function( files ) {
 
     gulp.start( 'sass' );
     gulp.start( 'coffee' );
