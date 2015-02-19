@@ -70,7 +70,7 @@ gulp.task( 'default', function() {
 gulp.task( 'minify-css', function () {
 
   gulp.src( cssFiles )
-      .pipe( minifycss( { indentedSyntax: true } ) )
+      .pipe( minifycss( { keepBreaks: true } ) )
       .pipe( gulp.dest( cssFiles ) );
 
 } );
