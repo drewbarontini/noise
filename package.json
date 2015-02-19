@@ -7,6 +7,7 @@
     "gulp": "^3.8.7",
     "gulp-coffee": "^2.1.2",
     "gulp-coffeelint": "^0.3.4",
+    "gulp-minify-css": "^0.4.6",
     "gulp-util": "^3.0.0",
     "gulp-watch": "^0.7.0",
     "merge-stream": "^0.1.5",

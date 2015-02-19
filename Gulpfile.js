@@ -8,22 +8,42 @@
 //   Modules
 // -------------------------------------
 
-var gulp       = require( 'gulp' );
-    coffee     = require( 'gulp-coffee' ),
-    gutil      = require( 'gulp-util' ),
-    watch      = require( 'gulp-watch' ),
-    es         = require( 'event-stream' ),
-    coffeelint = require( 'gulp-coffeelint' )
-    sass       = require( 'gulp-sass' );
+// ----- Shared ----- //
+
+var gulp  = require( 'gulp' );
+var watch = require( 'gulp-watch' );
+
+// ----- Coffee ----- //
+
+var coffee = require( 'gulp-coffee' );
+var es     = require( 'event-stream' );
+var gutil  = require( 'gulp-util' );
+
+// ----- Coffee Lint ----- //
+
+var coffeelint = require( 'gulp-coffeelint' );
+
+// ----- Minify CSS ----- //
+
+ var cssmin = require( 'gulp-minify-css' )
+
+// ----- Sass ----- //
+
+var sass = require( 'gulp-sass' );
 
 // -------------------------------------
 //   Variables
 // -------------------------------------
 
+// ----- Coffee ----- //
+
 var coffeeFiles     = 'javascripts/src/*.coffee';
 var coffeeSpecFiles = 'spec/javascripts/src/*.coffee';
 var jsFiles         = 'javascripts/';
 var jsSpecFiles     = 'spec/javascripts/';
+
+// ----- Sass ----- //
+
 var sassFiles       = 'stylesheets/*.sass';
 var cssFiles        = 'stylesheets';
 
@@ -39,6 +59,19 @@ gulp.task( 'default', function() {
     gulp.start( 'coffee' );
 
   } );
+
+} );
+
+// -------------------------------------
+//   Task: Minify CSS
+// -------------------------------------
+
+
+gulp.task( 'minify-css', function () {
+
+  gulp.src( cssFiles )
+      .pipe( minifycss( { indentedSyntax: true } ) )
+      .pipe( gulp.dest( cssFiles ) );
 
 } );
 
