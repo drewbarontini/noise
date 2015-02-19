@@ -16,6 +16,7 @@ var gutil      = require( 'gulp-util' );       // coffee
 var minifycss  = require( 'gulp-minify-css' )  // minify-css
 var rename     = require( 'rename' );          // minify-css
 var sass       = require( 'gulp-sass' );       // sass
+var uglify     = require( 'gulp-uglify' );     // uglify
 
 // -------------------------------------
 //   Options
@@ -32,6 +33,12 @@ var options = {
     files       : 'stylesheets/*.css',
     file        : 'stylesheets/application.css',
     destination : 'stylesheets'
+  },
+
+  js : {
+    files       : 'javascripts/*.js',
+    file        : 'javascripts/application.js',
+    destination : 'javascripts'
   },
 
   sass : {
@@ -108,5 +115,17 @@ gulp.task( 'sass', function () {
   gulp.src( options.sass.files )
       .pipe( sass( { indentedSyntax: true } ) )
       .pipe( gulp.dest( options.sass.destination ) );
+
+} );
+
+// -------------------------------------
+//   Uglify
+// -------------------------------------
+
+gulp.task( 'uglify', function () {
+
+  gulp.src( options.js.file )
+      .pipe( uglify() )
+      .pipe( gulp.dest( options.js.destination ) );
 
 } );
