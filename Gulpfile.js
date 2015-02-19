@@ -51,9 +51,9 @@ gulp.task( 'default', function() {
 
 gulp.task( 'minify-css', function () {
 
-  gulp.src( cssFiles )
+  gulp.src( cssFiles + '/*.css' )
       .pipe( minifycss( { keepBreaks: true } ) )
-      .pipe( gulp.dest( cssFiles + '/*.css' ) );
+      .pipe( gulp.dest( cssFiles ) );
 
 } );
 
