@@ -8,48 +8,26 @@
 //   Modules
 // -------------------------------------
 
-// ----- Shared ----- //
-
-var gulp  = require( 'gulp' );
-var watch = require( 'gulp-watch' );
-
-// ----- Coffee ----- //
-
-var coffee = require( 'gulp-coffee' );
-var es     = require( 'event-stream' );
-var gutil  = require( 'gulp-util' );
-
-// ----- Coffee Lint ----- //
-
+var gulp       = require( 'gulp' );
+var watch      = require( 'gulp-watch' );
+var coffee     = require( 'gulp-coffee' );
+var es         = require( 'event-stream' );
+var gutil      = require( 'gulp-util' );
 var coffeelint = require( 'gulp-coffeelint' );
-
-// ----- Minify CSS ----- //
-
- var cssmin = require( 'gulp-minify-css' )
-
-// ----- Sass ----- //
-
-var sass = require( 'gulp-sass' );
+var minifycss  = require( 'gulp-minify-css' )
+var sass       = require( 'gulp-sass' );
 
 // -------------------------------------
 //   Variables
 // -------------------------------------
 
-// ----- Coffee ----- //
-
 var coffeeFiles     = 'javascripts/src/*.coffee';
 var coffeeSpecFiles = 'spec/javascripts/src/*.coffee';
 var jsFiles         = 'javascripts/';
 var jsSpecFiles     = 'spec/javascripts/';
-
-// ----- Sass ----- //
-
 var sassFiles       = 'stylesheets/*.sass';
 var cssFiles        = 'stylesheets';
-
-// ----- Watched Files ----- //
-
-var filesToWatch = [ sassFiles, coffeeFiles, coffeeSpecFiles ];
+var filesToWatch    = [ sassFiles, coffeeFiles, coffeeSpecFiles ];
 
 // -------------------------------------
 //   Task: Default
@@ -75,7 +53,7 @@ gulp.task( 'minify-css', function () {
 
   gulp.src( cssFiles )
       .pipe( minifycss( { keepBreaks: true } ) )
-      .pipe( gulp.dest( cssFiles ) );
+      .pipe( gulp.dest( cssFiles + '/*.css' ) );
 
 } );
 
