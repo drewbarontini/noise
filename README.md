@@ -1,4 +1,4 @@
 Noise
 =====
 
-Gulp/Grunt template files.
+Gulp template files.
