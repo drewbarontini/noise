@@ -21,13 +21,28 @@ var sass       = require( 'gulp-sass' );
 //   Variables
 // -------------------------------------
 
-var coffeeFiles     = 'javascripts/src/*.coffee';
-var coffeeSpecFiles = 'spec/javascripts/src/*.coffee';
-var jsFiles         = 'javascripts/';
-var jsSpecFiles     = 'spec/javascripts/';
-var sassFiles       = 'stylesheets/*.sass';
-var cssFiles        = 'stylesheets';
-var filesToWatch    = [ sassFiles, coffeeFiles, coffeeSpecFiles ];
+var options = {
+
+  coffee : {
+    files       : 'javascripts/src/*.coffee',
+    destination : 'javascripts'
+  },
+
+  css : {
+    files       : 'stylesheets/*.css',
+    destination : 'stylesheets'
+  },
+
+  sass : {
+    files       : 'stylesheets/*.sass',
+    destination : 'stylesheets'
+  },
+
+  watch : function() {
+    return [ this.coffee.files, this.sass.files ];
+  }
+
+};
 
 // -------------------------------------
 //   Task: Default
@@ -35,7 +50,7 @@ var filesToWatch    = [ sassFiles, coffeeFiles, coffeeSpecFiles ];
 
 gulp.task( 'default', function() {
 
-  watch( filesToWatch, function( files ) {
+  watch( options.watch(), function( files ) {
 
     gulp.start( 'sass' );
     gulp.start( 'coffee' );
@@ -51,9 +66,9 @@ gulp.task( 'default', function() {
 
 gulp.task( 'minify-css', function () {
 
-  gulp.src( cssFiles + '/*.css' )
+  gulp.src( options.css.files )
       .pipe( minifycss() )
-      .pipe( gulp.dest( cssFiles ) );
+      .pipe( gulp.dest( options.css.destination ) );
 
 } );
 
@@ -63,9 +78,9 @@ gulp.task( 'minify-css', function () {
 
 gulp.task( 'sass', function () {
 
-  gulp.src( sassFiles )
+  gulp.src( options.sass.files )
       .pipe( sass( { indentedSyntax: true } ) )
-      .pipe( gulp.dest( cssFiles ) );
+      .pipe( gulp.dest( options.sass.destination ) );
 
 } );
 
@@ -75,15 +90,9 @@ gulp.task( 'sass', function () {
 
 gulp.task( 'coffee', function() {
 
-  var components = gulp.src( srcFiles )
+  gulp.src( options.coffee.files )
     .pipe(  coffee( { bare: true } ).on('error', gutil.log ) )
-    .pipe(  gulp.dest( jsFiles ) );
-
-  var tests = gulp.src( specFiles )
-    .pipe(  coffee( { bare: true } ).on('error', gutil.log ) )
-    .pipe(  gulp.dest( jsSpecFiles ) );
-
-  return es.concat( components, tests );
+    .pipe(  gulp.dest( options.coffee.destination ) );
 
 } );
 
@@ -93,7 +102,7 @@ gulp.task( 'coffee', function() {
 
 gulp.task( 'lint', function () {
 
-  gulp.src( srcFiles )
+  gulp.src( options.coffee.files )
       .pipe( coffeelint( ) )
       .pipe( coffeelint.reporter( ) )
 
