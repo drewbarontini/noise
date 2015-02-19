@@ -14,7 +14,7 @@ var gulp       = require( 'gulp' );
     watch      = require( 'gulp-watch' ),
     es         = require( 'event-stream' ),
     coffeelint = require( 'gulp-coffeelint' )
-    sass       = require('gulp-sass');
+    sass       = require( 'gulp-sass' );
 
 // -------------------------------------
 //   Variables
