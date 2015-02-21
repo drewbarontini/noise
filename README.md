@@ -1,4 +1,4 @@
 Noise
 =====
 
-Gulp template files.
+[Gulp](http://gulpjs.com/) template files.
