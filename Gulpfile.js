@@ -75,7 +75,7 @@ gulp.task( 'default', function() {
 gulp.task( 'coffee', function() {
 
   gulp.src( options.coffee.files )
-    .pipe(  coffee( { bare: true } ).on('error', gutil.log ) )
+    .pipe(  coffee( { bare: true } ).on( 'error', gutil.log ) )
     .pipe(  gulp.dest( options.coffee.destination ) );
 
 } );
