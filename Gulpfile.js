@@ -92,7 +92,7 @@ gulp.task( 'lint', function () {
       .pipe( coffeelint.reporter( ) )
 
 } );
-    /
+
 // -------------------------------------
 //   Task: Minify CSS
 // -------------------------------------
