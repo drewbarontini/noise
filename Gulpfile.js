@@ -89,7 +89,7 @@ gulp.task( 'lint', function () {
   gulp.src( options.coffee.files )
       .pipe( coffeelint() )
       .on( 'error', function( error ) { console.log( error.message ); } )
-      .pipe( coffeelint.reporter( ) )
+      .pipe( coffeelint.reporter() )
 
 } );
 
