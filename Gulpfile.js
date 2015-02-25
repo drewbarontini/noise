@@ -25,26 +25,31 @@ var uglify     = require( 'gulp-uglify' );     // uglify
 
 var options = {
 
+  build : {
+    tasks       : [ 'minify-css', 'uglify' ],
+    destination : 'build/'
+  },
+
   coffee : {
-    files       : 'javascripts/src/*.coffee',
-    destination : 'javascripts'
+    files       : 'source/javascripts/src/*.coffee',
+    destination : 'source/javascripts'
   },
 
   css : {
-    files       : 'stylesheets/*.css',
-    file        : 'stylesheets/application.css',
-    destination : 'stylesheets'
+    files       : 'source/stylesheets/*.css',
+    file        : 'source/stylesheets/application.css',
+    destination : 'source/stylesheets'
   },
 
   js : {
-    files       : 'javascripts/*.js',
-    file        : 'javascripts/application.js',
-    destination : 'javascripts'
+    files       : 'source/javascripts/*.js',
+    file        : 'source/javascripts/application.js',
+    destination : 'source/javascripts'
   },
 
   sass : {
-    files       : 'stylesheets/*.sass',
-    destination : 'stylesheets'
+    files       : 'source/stylesheets/*.sass',
+    destination : 'source/stylesheets'
   },
 
   watch : function() {
