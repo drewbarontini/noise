@@ -9,6 +9,7 @@
 //   `gulp build`
 //   `gulp coffee`
 //   `gulp lint`
+//   `gulp minify-css`
 //   `gulp sass`
 //   `gulp test-css`
 //   `gulp test-js`
