@@ -10,6 +10,8 @@
 //   `gulp coffee`
 //   `gulp lint`
 //   `gulp sass`
+//   `gulp test-css`
+//   `gulp test-js`
 //   `gulp uglify`
 //
 // *************************************
@@ -169,7 +171,36 @@ gulp.task( 'sass', function () {
 } );
 
 // -------------------------------------
-//   Uglify
+//   Task: Test CSS
+// -------------------------------------
+
+gulp.task( 'test-css', function() {
+
+  gulp.src( options.css.file )
+    .pipe( plugins.plumber() )
+    .pipe( plugins.parker() )
+
+  gulp.src( options.css.file )
+    .pipe( plugins.plumber() )
+    .pipe( plugins.csscss() )
+
+});
+
+// -------------------------------------
+//   Task: Test JS
+// -------------------------------------
+
+gulp.task( 'test-js', function() {
+
+  gulp.src( options.js.file )
+    .pipe( plugins.plumber() )
+    .pipe( plugins.jshint() )
+    .pipe( plugins.jshint.reporter( 'default' ) )
+
+});
+
+// -------------------------------------
+//   Task: Uglify
 // -------------------------------------
 
 gulp.task( 'uglify', function () {
