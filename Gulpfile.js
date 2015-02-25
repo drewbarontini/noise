@@ -77,8 +77,11 @@ var options = {
     destination : 'source/stylesheets'
   },
 
-  watch : function() {
-    return [ this.coffee.files, this.sass.files ];
+  watch : {
+    run : function() {
+      return [ options.coffee.files, options.sass.files ];
+    },
+    tasks : [ 'sass', 'coffee', 'minify-css', 'build' ]
   }
 
 };
@@ -89,12 +92,11 @@ var options = {
 
 gulp.task( 'default', function() {
 
-  plugins.watch( options.watch(), function( files ) {
+  plugins.watch( options.watch.run(), function( files ) {
 
-    gulp.start( 'sass' );
-    gulp.start( 'coffee' );
-    gulp.start( 'minify-css' );
-    gulp.start( 'build' );
+    options.watch.tasks.forEach( function( task ) {
+      gulp.start( task );
+    } );
 
   } );
 
