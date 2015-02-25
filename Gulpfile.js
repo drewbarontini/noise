@@ -3,6 +3,16 @@
 //   Gulpfile
 //
 // *************************************
+//
+// Available tasks:
+//   `gulp`
+//   `gulp build`
+//   `gulp coffee`
+//   `gulp lint`
+//   `gulp sass`
+//   `gulp uglify`
+//
+// *************************************
 
 // -------------------------------------
 //   Modules
