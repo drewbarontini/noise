@@ -14,7 +14,7 @@ var coffee     = require( 'gulp-coffee' );     // coffee
 var coffeelint = require( 'gulp-coffeelint' ); // coffee
 var gutil      = require( 'gulp-util' );       // coffee
 var minifycss  = require( 'gulp-minify-css' )  // minify-css
-var rename     = require( 'rename' );          // minify-css
+var rename     = require( 'gulp-rename' );     // minify-css
 var sass       = require( 'gulp-sass' );       // sass
 var uglify     = require( 'gulp-uglify' );     // uglify
 
