@@ -35,7 +35,7 @@ $ gulp coffee
 > Compiles CoffeeScript files.
 
 ```
-$ gulp link
+$ gulp lint
 ```
 
 > Lints CoffeeScript files.
