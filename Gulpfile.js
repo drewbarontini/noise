@@ -8,17 +8,17 @@
 //   Modules
 // -------------------------------------
 
-var gulp         = require( 'gulp' );            // all
-var watch        = require( 'gulp-watch' );      // all
-var plumber      = require( 'gulp-plumber' );    // all
-var coffee       = require( 'gulp-coffee' );     // coffee
-var coffeelint   = require( 'gulp-coffeelint' ); // coffee
-var gutil        = require( 'gulp-util' );       // coffee
-var autoprefixer = require('gulp-autoprefixer'); // css
-var minifycss    = require( 'gulp-minify-css' )  // minify-css
-var rename       = require( 'gulp-rename' );     // minify-css
-var sass         = require( 'gulp-sass' );       // sass
-var uglify       = require( 'gulp-uglify' );     // uglify
+var gulp         = require( 'gulp' );              // all
+var watch        = require( 'gulp-watch' );        // all
+var plumber      = require( 'gulp-plumber' );      // all
+var coffee       = require( 'gulp-coffee' );       // coffee
+var coffeelint   = require( 'gulp-coffeelint' );   // coffee
+var gutil        = require( 'gulp-util' );         // coffee
+var autoprefixer = require( 'gulp-autoprefixer' ); // css
+var minifycss    = require( 'gulp-minify-css' )    // minify-css
+var rename       = require( 'gulp-rename' );       // minify-css
+var sass         = require( 'gulp-sass' );         // sass
+var uglify       = require( 'gulp-uglify' );       // uglify
 
 // -------------------------------------
 //   Options
