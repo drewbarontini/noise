@@ -7,18 +7,30 @@
 // -------------------------------------
 //   Modules
 // -------------------------------------
+//
+// gulp              : The streaming build system
+// gulp-autoprefixer : Prefix CSS
+// gulp-coffee       : Compile CoffeeScript files
+// gulp-coffeelint   : Lint your CoffeeScript
+// gulp-load-plugins : Automatically load Gulp plugins
+// gulp-minify-css   : Minify CSS
+// gulp-plumber      : Prevent pipe breaking from errors
+// gulp-rename       : Rename files
+// gulp-sass         : Compile Sass
+// gulp-uglify       : Minify JavaScript with UglifyJS
+// gulp-util         : Utility functions
+// gulp-watch        : Watch stream
+//
+// -------------------------------------
 
-var gulp         = require( 'gulp' );              // all
-var watch        = require( 'gulp-watch' );        // all
-var plumber      = require( 'gulp-plumber' );      // all
-var coffee       = require( 'gulp-coffee' );       // coffee
-var coffeelint   = require( 'gulp-coffeelint' );   // coffee
-var gutil        = require( 'gulp-util' );         // coffee
-var autoprefixer = require( 'gulp-autoprefixer' ); // css
-var minifycss    = require( 'gulp-minify-css' )    // minify-css
-var rename       = require( 'gulp-rename' );       // minify-css
-var sass         = require( 'gulp-sass' );         // sass
-var uglify       = require( 'gulp-uglify' );       // uglify
+var gulp    = require( 'gulp' );
+var plugins = require( 'gulp-load-plugins' )( {
+
+  rename : {
+    'gulp-minify-css': 'cssmin'
+  }
+
+} );
 
 // -------------------------------------
 //   Options
@@ -65,7 +77,7 @@ var options = {
 
 gulp.task( 'default', function() {
 
-  watch( options.watch(), function( files ) {
+  plugins.watch( options.watch(), function( files ) {
 
     gulp.start( 'sass' );
     gulp.start( 'coffee' );
@@ -95,8 +107,8 @@ gulp.task( 'build', function() {
 gulp.task( 'coffee', function() {
 
   gulp.src( options.coffee.files )
-    .pipe( plumber() )
-    .pipe( coffee( { bare: true } ) )
+    .pipe( plugins.plumber() )
+    .pipe( plugins.coffee( { bare: true } ) )
     .pipe( gulp.dest( options.coffee.destination ) );
 
 } );
@@ -108,9 +120,9 @@ gulp.task( 'coffee', function() {
 gulp.task( 'lint', function () {
 
   gulp.src( options.coffee.files )
-      .pipe( plumber() )
-      .pipe( coffeelint() )
-      .pipe( coffeelint.reporter() )
+      .pipe( plugins.plumber() )
+      .pipe( plugins.coffeelint() )
+      .pipe( plugins.coffeelint.reporter() )
 
 } );
 
@@ -122,9 +134,9 @@ gulp.task( 'lint', function () {
 gulp.task( 'minify-css', function () {
 
   gulp.src( options.css.file )
-      .pipe( plumber() )
-      .pipe( minifycss() )
-      .pipe( rename( { suffix: '.min' } ) )
+      .pipe( plugins.plumber() )
+      .pipe( plugins.cssmin() )
+      .pipe( plugins.rename( { suffix: '.min' } ) )
       .pipe( gulp.dest( options.build.destination ) );
 
 } );
@@ -136,9 +148,9 @@ gulp.task( 'minify-css', function () {
 gulp.task( 'sass', function () {
 
   gulp.src( options.sass.files )
-      .pipe( plumber() )
-      .pipe( sass( { indentedSyntax: true } ) )
-      .pipe( autoprefixer( {
+      .pipe( plugins.plumber() )
+      .pipe( plugins.sass( { indentedSyntax: true } ) )
+      .pipe( plugins.autoprefixer( {
               browsers : [ 'last 2 versions' ],
               cascade  : false
           } ) )
@@ -153,9 +165,9 @@ gulp.task( 'sass', function () {
 gulp.task( 'uglify', function () {
 
   gulp.src( options.js.file )
-      .pipe( plumber() )
-      .pipe( uglify() )
-      .pipe( rename( { suffix: '.min' } ) )
+      .pipe( plugins.plumber() )
+      .pipe( plugins.uglify() )
+      .pipe( plugins.rename( { suffix: '.min' } ) )
       .pipe( gulp.dest( options.build.destination ) );
 
 } );
