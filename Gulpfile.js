@@ -10,6 +10,7 @@
 
 var gulp       = require( 'gulp' );            // all
 var watch      = require( 'gulp-watch' );      // all
+var plumber    = require( 'gulp-plumber' );    // all
 var coffee     = require( 'gulp-coffee' );     // coffee
 var coffeelint = require( 'gulp-coffeelint' ); // coffee
 var gutil      = require( 'gulp-util' );       // coffee
@@ -69,13 +70,26 @@ gulp.task( 'default', function() {
 } );
 
 // -------------------------------------
+//   Task: Build
+// -------------------------------------
+
+gulp.task( 'build', function() {
+
+  options.build.tasks.forEach( function( task ) {
+    gulp.start( task );
+  } );
+
+});
+
+// -------------------------------------
 //   Task: Coffee
 // -------------------------------------
 
 gulp.task( 'coffee', function() {
 
   gulp.src( options.coffee.files )
-    .pipe( coffee( { bare: true } ).on( 'error', gutil.log ) )
+    .pipe( plumber() )
+    .pipe( coffee( { bare: true } ) )
     .pipe( gulp.dest( options.coffee.destination ) );
 
 } );
@@ -87,8 +101,8 @@ gulp.task( 'coffee', function() {
 gulp.task( 'lint', function () {
 
   gulp.src( options.coffee.files )
+      .pipe( plumber() )
       .pipe( coffeelint() )
-      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( coffeelint.reporter() )
 
 } );
@@ -101,11 +115,10 @@ gulp.task( 'lint', function () {
 gulp.task( 'minify-css', function () {
 
   gulp.src( options.css.file )
+      .pipe( plumber() )
       .pipe( minifycss() )
-      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( rename( { suffix: '.min' } ) )
-      .on( 'error', function( error ) { console.log( error.message ); } )
-      .pipe( gulp.dest( options.css.destination ) );
+      .pipe( gulp.dest( options.build.destination ) );
 
 } );
 
@@ -116,8 +129,8 @@ gulp.task( 'minify-css', function () {
 gulp.task( 'sass', function () {
 
   gulp.src( options.sass.files )
+      .pipe( plumber() )
       .pipe( sass( { indentedSyntax: true } ) )
-      .on( 'error', function( error ) { console.log( error.message ); } )
       .pipe( gulp.dest( options.sass.destination ) );
 
 } );
@@ -129,8 +142,9 @@ gulp.task( 'sass', function () {
 gulp.task( 'uglify', function () {
 
   gulp.src( options.js.file )
+      .pipe( plumber() )
       .pipe( uglify() )
-      .on( 'error', function( error ) { console.log( error.message ); } )
-      .pipe( gulp.dest( options.js.destination ) );
+      .pipe( rename( { suffix: '.min' } ) )
+      .pipe( gulp.dest( options.build.destination ) );
 
 } );
