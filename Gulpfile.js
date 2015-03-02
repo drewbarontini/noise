@@ -25,8 +25,11 @@
 // gulp-autoprefixer : Prefix CSS
 // gulp-coffee       : Compile CoffeeScript files
 // gulp-coffeelint   : Lint your CoffeeScript
+// gulp-csscss       : CSS redundancy analyzer
+// gulp-jshint       : JavaScript code quality tool
 // gulp-load-plugins : Automatically load Gulp plugins
 // gulp-minify-css   : Minify CSS
+// gulp-parker       : Stylesheet analysis tool
 // gulp-plumber      : Prevent pipe breaking from errors
 // gulp-rename       : Rename files
 // gulp-sass         : Compile Sass
