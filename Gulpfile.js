@@ -119,7 +119,7 @@ gulp.task( 'build', function() {
 });
 
 // -------------------------------------
-//   Task: Coffee
+//   Task: Compile Coffee
 // -------------------------------------
 
 gulp.task( 'compile:coffee', function() {
@@ -132,7 +132,7 @@ gulp.task( 'compile:coffee', function() {
 } );
 
 // -------------------------------------
-//   Task: Sass
+//   Task: Compile Sass
 // -------------------------------------
 
 gulp.task( 'compile:sass', function () {
@@ -149,7 +149,7 @@ gulp.task( 'compile:sass', function () {
 } );
 
 // -------------------------------------
-//   Task: Lint
+//   Task: Lint Coffee
 // -------------------------------------
 
 gulp.task( 'lint:coffee', function () {
