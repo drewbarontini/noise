@@ -7,13 +7,13 @@
 // Available tasks:
 //   `gulp`
 //   `gulp build`
-//   `gulp coffee`
-//   `gulp lint`
-//   `gulp minify-css`
-//   `gulp sass`
-//   `gulp test-css`
-//   `gulp test-js`
-//   `gulp uglify`
+//   `gulp compile:coffee`
+//   `gulp compile:sass`
+//   `gulp lint:coffee`
+//   `gulp minify:css`
+//   `gulp minify:js`
+//   `gulp test:css`
+//   `gulp test:js`
 //
 // *************************************
 
@@ -55,7 +55,7 @@ var plugins = require( 'gulp-load-plugins' )( {
 var options = {
 
   build : {
-    tasks       : [ 'minify-css', 'uglify' ],
+    tasks       : [ 'minify:css', 'minify:js' ],
     destination : 'build/'
   },
 
@@ -85,7 +85,7 @@ var options = {
     run : function() {
       return [ options.coffee.files, options.sass.files ];
     },
-    tasks : [ 'sass', 'coffee', 'minify-css', 'build' ]
+    tasks : [ 'compile:sass', 'compile:coffee', 'minify:css', 'build' ]
   }
 
 };
@@ -122,7 +122,7 @@ gulp.task( 'build', function() {
 //   Task: Coffee
 // -------------------------------------
 
-gulp.task( 'coffee', function() {
+gulp.task( 'compile:coffee', function() {
 
   gulp.src( options.coffee.files )
     .pipe( plugins.plumber() )
@@ -132,38 +132,10 @@ gulp.task( 'coffee', function() {
 } );
 
 // -------------------------------------
-//   Task: Lint
-// -------------------------------------
-
-gulp.task( 'lint', function () {
-
-  gulp.src( options.coffee.files )
-      .pipe( plugins.plumber() )
-      .pipe( plugins.coffeelint() )
-      .pipe( plugins.coffeelint.reporter() )
-
-} );
-
-// -------------------------------------
-//   Task: Minify CSS
-// -------------------------------------
-
-
-gulp.task( 'minify-css', function () {
-
-  gulp.src( options.css.file )
-      .pipe( plugins.plumber() )
-      .pipe( plugins.cssmin() )
-      .pipe( plugins.rename( { suffix: '.min' } ) )
-      .pipe( gulp.dest( options.build.destination ) );
-
-} );
-
-// -------------------------------------
 //   Task: Sass
 // -------------------------------------
 
-gulp.task( 'sass', function () {
+gulp.task( 'compile:sass', function () {
 
   gulp.src( options.sass.files )
       .pipe( plugins.plumber() )
@@ -177,10 +149,51 @@ gulp.task( 'sass', function () {
 } );
 
 // -------------------------------------
+//   Task: Lint
+// -------------------------------------
+
+gulp.task( 'lint:coffee', function () {
+
+  gulp.src( options.coffee.files )
+      .pipe( plugins.plumber() )
+      .pipe( plugins.coffeelint() )
+      .pipe( plugins.coffeelint.reporter() )
+
+} );
+
+// -------------------------------------
+//   Task: Minify CSS
+// -------------------------------------
+
+gulp.task( 'minify:css', function () {
+
+  gulp.src( options.css.file )
+      .pipe( plugins.plumber() )
+      .pipe( plugins.cssmin( { advanced: true } ) )
+      .pipe( plugins.rename( { suffix: '.min' } ) )
+      .pipe( gulp.dest( options.build.destination ) );
+
+} );
+
+// -------------------------------------
+//   Task: Minify JS
+// -------------------------------------
+
+gulp.task( 'minify:js', function () {
+
+  gulp.src( options.js.file )
+      .pipe( plugins.plumber() )
+      .pipe( plugins.uglify() )
+      .pipe( plugins.rename( { suffix: '.min' } ) )
+      .pipe( gulp.dest( options.build.destination ) );
+
+} );
+
+// -------------------------------------
 //   Task: Test CSS
 // -------------------------------------
 
-gulp.task( 'test-css', function() {
+gulp.task( 'test:css', function() {
 
   gulp.src( options.css.file )
     .pipe( plugins.plumber() )
@@ -196,7 +209,7 @@ gulp.task( 'test-css', function() {
 //   Task: Test JS
 // -------------------------------------
 
-gulp.task( 'test-js', function() {
+gulp.task( 'test:js', function() {
 
   gulp.src( options.js.file )
     .pipe( plugins.plumber() )
@@ -204,17 +217,3 @@ gulp.task( 'test-js', function() {
     .pipe( plugins.jshint.reporter( 'default' ) )
 
 });
-
-// -------------------------------------
-//   Task: Uglify
-// -------------------------------------
-
-gulp.task( 'uglify', function () {
-
-  gulp.src( options.js.file )
-      .pipe( plugins.plumber() )
-      .pipe( plugins.uglify() )
-      .pipe( plugins.rename( { suffix: '.min' } ) )
-      .pipe( gulp.dest( options.build.destination ) );
-
-} );

@@ -29,46 +29,46 @@ $ gulp build
 > Minifies both the CSS and JavaScript and outputs to the `build/` directory.
 
 ```
-$ gulp coffee
+$ gulp compile:coffee
 ```
 
 > Compiles CoffeeScript files.
 
 ```
-$ gulp lint
-```
-
-> Lints CoffeeScript files.
-
-```
-$ gulp minify-css
-```
-
-> Minifies CSS file.
-
-```
-$ gulp sass
+$ gulp compile:sass
 ```
 
 > Compiles Sass files.
 
 ```
-$ gulp test-css
+$ gulp lint:coffee
+```
+
+> Lints CoffeeScript files.
+
+```
+$ gulp minify:css
+```
+
+> Minifies CSS file.
+
+```
+$ gulp minify:js
+```
+
+> Minifies JavaScript file.
+
+```
+$ gulp test:css
 ```
 
 > Runs `csscss` and `parker` on CSS file.
 
 ```
-$ gulp test-js
+$ gulp test:js
 ```
 
 > Runs `jshint` on JavaScript file.
-
-```
-$ gulp ugilify
-```
-
-> Minifies JavaScript file.
 
 Setup
 -----
