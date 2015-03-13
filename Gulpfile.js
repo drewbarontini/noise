@@ -169,7 +169,7 @@ gulp.task( 'minify:css', function () {
 
   gulp.src( options.css.file )
       .pipe( plugins.plumber() )
-      .pipe( plugins.cssmin( { advanced: true } ) )
+      .pipe( plugins.cssmin( { advanced: false } ) )
       .pipe( plugins.rename( { suffix: '.min' } ) )
       .pipe( gulp.dest( options.build.destination ) );
 
