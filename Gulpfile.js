@@ -36,10 +36,12 @@
 // gulp-uglify       : Minify JavaScript with UglifyJS
 // gulp-util         : Utility functions
 // gulp-watch        : Watch stream
+// run-sequence      : Run a series of dependent gulp tasks in order
 //
 // -------------------------------------
 
 var gulp    = require( 'gulp' );
+var run     = require( 'run-sequence' );
 var plugins = require( 'gulp-load-plugins' )( {
 
   rename : {
@@ -85,7 +87,7 @@ var options = {
     run : function() {
       return [ options.coffee.files, options.sass.files ];
     },
-    tasks : [ 'compile:sass', 'compile:coffee', 'minify:css', 'build' ]
+    tasks : [ [ 'compile:sass', 'compile:coffee', 'minify:css' ], 'build' ]
   }
 
 };
@@ -98,9 +100,7 @@ gulp.task( 'default', function() {
 
   plugins.watch( options.watch.run(), function( files ) {
 
-    options.watch.tasks.forEach( function( task ) {
-      gulp.start( task );
-    } );
+    run( options.watch.tasks[0], options.watch.tasks[1] );
 
   } );
 
