@@ -9,6 +9,7 @@
 //   `gulp build`
 //   `gulp compile:coffee`
 //   `gulp compile:sass`
+//   `gulp icons`
 //   `gulp lint:coffee`
 //   `gulp minify:css`
 //   `gulp minify:js`
@@ -33,6 +34,8 @@
 // gulp-plumber      : Prevent pipe breaking from errors
 // gulp-rename       : Rename files
 // gulp-sass         : Compile Sass
+// gulp-svgmin       : Minify SVG files
+// gulp-svgstore     : Combine SVG files into one
 // gulp-uglify       : Minify JavaScript with UglifyJS
 // gulp-util         : Utility functions
 // gulp-watch        : Watch stream
@@ -76,6 +79,11 @@ var options = {
     files       : 'source/javascripts/*.js',
     file        : 'source/javascripts/application.js',
     destination : 'source/javascripts'
+  },
+
+  icons : {
+    files       : 'source/images/icons/icon-*.svg',
+    destination : 'source/images/icons'
   },
 
   sass : {
@@ -147,6 +155,19 @@ gulp.task( 'compile:sass', function () {
       .pipe( gulp.dest( options.sass.destination ) );
 
 } );
+
+// -------------------------------------
+//   Task: Icons
+// -------------------------------------
+
+gulp.task( 'icons', function() {
+
+  gulp.src( options.icons.files )
+    .pipe( plugins.svgmin() )
+    .pipe( plugins.svgstore( { inlineSvg: true } ) )
+    .pipe( gulp.dest( options.icons.destination ) );
+
+});
 
 // -------------------------------------
 //   Task: Lint Coffee
