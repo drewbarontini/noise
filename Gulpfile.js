@@ -39,7 +39,7 @@
 // gulp-uglify       : Minify JavaScript with UglifyJS
 // gulp-util         : Utility functions
 // gulp-watch        : Watch stream
-// run-sequence      : Run a series of dependent gulp tasks in order
+// run-sequence      : Run a series of dependent Gulp tasks in order
 //
 // -------------------------------------
 
@@ -59,15 +59,21 @@ var plugins = require( 'gulp-load-plugins' )( {
 
 var options = {
 
+  // ----- Build ----- //
+
   build : {
     tasks       : [ 'minify:css', 'minify:js' ],
     destination : 'build/'
   },
 
+  // ----- Coffe ----- //
+
   coffee : {
     files       : 'source/javascripts/src/*.coffee',
     destination : 'source/javascripts'
   },
+
+  // ----- CSS ----- //
 
   css : {
     files       : 'source/stylesheets/*.css',
@@ -75,21 +81,29 @@ var options = {
     destination : 'source/stylesheets'
   },
 
+  // ----- JavaScript ----- //
+
   js : {
     files       : 'source/javascripts/*.js',
     file        : 'source/javascripts/application.js',
     destination : 'source/javascripts'
   },
 
+  // ----- Icons ----- //
+
   icons : {
     files       : 'source/images/icons/icon-*.svg',
     destination : 'source/images/icons'
   },
 
+  // ----- Sass ----- //
+
   sass : {
     files       : 'source/stylesheets/*.sass',
     destination : 'source/stylesheets'
   },
+
+  // ----- Watch ----- //
 
   watch : {
     run : function() {
