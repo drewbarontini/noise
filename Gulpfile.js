@@ -26,6 +26,7 @@
 // gulp-autoprefixer : Prefix CSS
 // gulp-coffee       : Compile CoffeeScript files
 // gulp-coffeelint   : Lint your CoffeeScript
+// gulp-concat       : Concatenate files
 // gulp-csscss       : CSS redundancy analyzer
 // gulp-jshint       : JavaScript code quality tool
 // gulp-load-plugins : Automatically load Gulp plugins
@@ -70,6 +71,7 @@ var options = {
 
   coffee : {
     files       : 'source/javascripts/src/*.coffee',
+    file        : 'application.js',
     destination : 'source/javascripts'
   },
 
@@ -149,6 +151,7 @@ gulp.task( 'compile:coffee', function() {
   gulp.src( options.coffee.files )
     .pipe( plugins.plumber() )
     .pipe( plugins.coffee( { bare: true } ) )
+    .pipe( plugins.concat( options.coffee.file ) )
     .pipe( gulp.dest( options.coffee.destination ) );
 
 } );
