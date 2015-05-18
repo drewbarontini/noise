@@ -13,6 +13,7 @@ What does this particular Gulp setup do?
 - Tests CSS file using `csscss` and `parker`
 - Tests JavaScript file using `jshint`
 - Runs Autoprefixer on CSS
+- Compiles multiple SVG icons into one SVG file
 
 Available Tasks
 ---------------
