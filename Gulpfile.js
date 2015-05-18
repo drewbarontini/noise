@@ -123,9 +123,7 @@ var options = {
 gulp.task( 'default', function() {
 
   plugins.watch( options.watch.run(), function( files ) {
-
     run( options.watch.tasks[0], options.watch.tasks[1] );
-
   } );
 
 } );
