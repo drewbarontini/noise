@@ -141,7 +141,7 @@ gulp.task( 'build', function() {
 });
 
 // -------------------------------------
-//   Task: Compile Coffee
+//   Task: Compile: Coffee
 // -------------------------------------
 
 gulp.task( 'compile:coffee', function() {
@@ -155,7 +155,7 @@ gulp.task( 'compile:coffee', function() {
 } );
 
 // -------------------------------------
-//   Task: Compile Sass
+//   Task: Compile: Sass
 // -------------------------------------
 
 gulp.task( 'compile:sass', function () {
@@ -198,7 +198,7 @@ gulp.task( 'lint:coffee', function () {
 } );
 
 // -------------------------------------
-//   Task: Minify CSS
+//   Task: Minify: CSS
 // -------------------------------------
 
 gulp.task( 'minify:css', function () {
@@ -212,7 +212,7 @@ gulp.task( 'minify:css', function () {
 } );
 
 // -------------------------------------
-//   Task: Minify JS
+//   Task: Minify: JS
 // -------------------------------------
 
 gulp.task( 'minify:js', function () {
@@ -226,7 +226,7 @@ gulp.task( 'minify:js', function () {
 } );
 
 // -------------------------------------
-//   Task: Test CSS
+//   Task: Test: CSS
 // -------------------------------------
 
 gulp.task( 'test:css', function() {
@@ -242,7 +242,7 @@ gulp.task( 'test:css', function() {
 });
 
 // -------------------------------------
-//   Task: Test JS
+//   Task: Test: JS
 // -------------------------------------
 
 gulp.task( 'test:js', function() {
