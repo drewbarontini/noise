@@ -67,7 +67,7 @@ var options = {
     destination : 'build/'
   },
 
-  // ----- Coffe ----- //
+  // ----- Coffee ----- //
 
   coffee : {
     files       : 'source/javascripts/src/*.coffee',
