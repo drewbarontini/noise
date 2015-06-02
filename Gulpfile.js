@@ -161,13 +161,13 @@ gulp.task( 'compile:coffee', function() {
 gulp.task( 'compile:sass', function () {
 
   gulp.src( options.sass.files )
-      .pipe( plugins.plumber() )
-      .pipe( plugins.sass( { indentedSyntax: true } ) )
-      .pipe( plugins.autoprefixer( {
-              browsers : [ 'last 2 versions' ],
-              cascade  : false
-          } ) )
-      .pipe( gulp.dest( options.sass.destination ) );
+    .pipe( plugins.plumber() )
+    .pipe( plugins.sass( { indentedSyntax: true } ) )
+    .pipe( plugins.autoprefixer( {
+            browsers : [ 'last 2 versions' ],
+            cascade  : false
+        } ) )
+    .pipe( gulp.dest( options.sass.destination ) );
 
 } );
 
@@ -191,9 +191,9 @@ gulp.task( 'icons', function() {
 gulp.task( 'lint:coffee', function () {
 
   gulp.src( options.coffee.files )
-      .pipe( plugins.plumber() )
-      .pipe( plugins.coffeelint() )
-      .pipe( plugins.coffeelint.reporter() )
+    .pipe( plugins.plumber() )
+    .pipe( plugins.coffeelint() )
+    .pipe( plugins.coffeelint.reporter() )
 
 } );
 
@@ -204,10 +204,10 @@ gulp.task( 'lint:coffee', function () {
 gulp.task( 'minify:css', function () {
 
   gulp.src( options.css.file )
-      .pipe( plugins.plumber() )
-      .pipe( plugins.cssmin( { advanced: false } ) )
-      .pipe( plugins.rename( { suffix: '.min' } ) )
-      .pipe( gulp.dest( options.build.destination ) );
+    .pipe( plugins.plumber() )
+    .pipe( plugins.cssmin( { advanced: false } ) )
+    .pipe( plugins.rename( { suffix: '.min' } ) )
+    .pipe( gulp.dest( options.build.destination ) );
 
 } );
 
@@ -218,10 +218,10 @@ gulp.task( 'minify:css', function () {
 gulp.task( 'minify:js', function () {
 
   gulp.src( options.js.file )
-      .pipe( plugins.plumber() )
-      .pipe( plugins.uglify() )
-      .pipe( plugins.rename( { suffix: '.min' } ) )
-      .pipe( gulp.dest( options.build.destination ) );
+    .pipe( plugins.plumber() )
+    .pipe( plugins.uglify() )
+    .pipe( plugins.rename( { suffix: '.min' } ) )
+    .pipe( gulp.dest( options.build.destination ) );
 
 } );
 
