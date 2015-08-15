@@ -42,6 +42,12 @@ $ gulp compile:sass
 > Compiles Sass files.
 
 ```
+$ gulp connect
+```
+
+> Starts server with LiveReload
+
+```
 $ gulp html
 ```
 
