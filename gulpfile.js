@@ -62,6 +62,12 @@ var plugins = require( 'gulp-load-plugins' )( {
 
 var options = {
 
+  // ----- Default ----- //
+
+  default : {
+    tasks : [ 'build', 'connect', 'watch' ]
+  },
+
   // ----- Build ----- //
 
   build : {
@@ -124,13 +130,32 @@ var options = {
     destination : 'source/stylesheets'
   },
 
+  // ----- Watch ----- //
+
+  watch : {
+    files : function() {
+      return [
+        options.html.files,
+        options.coffee.files,
+        options.sass.files
+      ]
+    },
+    run : function() {
+      return [
+        [ 'html' ],
+        [ 'compile:coffee', 'minify:js' ],
+        [ 'compile:sass', 'minify:css' ]
+      ]
+    }
+  }
+
 };
 
 // -------------------------------------
 //   Task: Default
 // -------------------------------------
 
-gulp.task( 'default', [ 'build', 'connect', 'watch' ] );
+gulp.task( 'default', options.default.tasks );
 
 // -------------------------------------
 //   Task: Build
@@ -293,8 +318,10 @@ gulp.task( 'test:js', function() {
 
 gulp.task( 'watch', function() {
 
-  gulp.watch( options.html.files, [ 'html' ] );
-  gulp.watch( options.coffee.files, [ 'compile:coffee', 'minify:js' ] );
-  gulp.watch( options.sass.files, [ 'compile:sass', 'minify:css' ] );
+  var watchFiles = options.watch.files();
+
+  watchFiles.forEach( function( files, index ) {
+    gulp.watch( files, options.watch.run()[ index ]  );
+  } );
 
 });
