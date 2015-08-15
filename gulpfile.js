@@ -11,6 +11,7 @@
 //   `gulp compile:sass`
 //   `gulp connect`
 //   `gulp icons`
+//   `gulp images`
 //   `gulp lint:coffee`
 //   `gulp minify:css`
 //   `gulp minify:js`
@@ -115,6 +116,13 @@ var options = {
     destination : 'build/images/icons'
   },
 
+  // ----- Images ----- //
+
+  images : {
+    files       : 'source/images',
+    destination : 'build/images'
+  },
+
   // ----- JavaScript ----- //
 
   js : {
@@ -142,7 +150,7 @@ var options = {
     },
     run : function() {
       return [
-        [ 'html' ],
+        [ 'html', 'images' ],
         [ 'compile:coffee', 'minify:js' ],
         [ 'compile:sass', 'minify:css' ]
       ]
@@ -237,6 +245,18 @@ gulp.task( 'icons', function() {
     .pipe( plugins.svgmin() )
     .pipe( plugins.svgstore( { inlineSvg: true } ) )
     .pipe( gulp.dest( options.icons.destination ) );
+
+});
+
+// -------------------------------------
+//   Task: Images
+// -------------------------------------
+
+gulp.task( 'images', function() {
+
+  gulp.src( options.images.files )
+    .pipe( gulp.dest( options.images.destination ) )
+    .pipe( plugins.connect.reload() );
 
 });
 

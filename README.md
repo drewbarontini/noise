@@ -42,10 +42,22 @@ $ gulp compile:sass
 > Compiles Sass files.
 
 ```
+$ gulp html
+```
+
+> Moves `source/index.html` to `build/index.html`
+
+```
 $ gulp icons
 ```
 
 > Compiles multiple SVG icons into one SVG file.
+
+```
+$ gulp images
+```
+
+> Moves `source/images` to `build/images`
 
 ```
 $ gulp lint:coffee
