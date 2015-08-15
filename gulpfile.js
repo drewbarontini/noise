@@ -108,19 +108,19 @@ var options = {
     destinationFile : 'build/index.html'
   },
 
+  // ----- Icons ----- //
+
+  icons : {
+    files       : 'source/images/icons/icon-*.svg',
+    destination : 'build/images/icons'
+  },
+
   // ----- JavaScript ----- //
 
   js : {
     files       : 'source/javascripts/*.js',
     file        : 'source/javascripts/application.js',
     destination : 'source/javascripts'
-  },
-
-  // ----- Icons ----- //
-
-  icons : {
-    files       : 'source/images/icons/icon-*.svg',
-    destination : 'source/images/icons'
   },
 
   // ----- Sass ----- //
