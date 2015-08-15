@@ -82,10 +82,7 @@ var options = {
   connect : {
     port : 9000,
     base : 'http://localhost',
-    root : 'build',
-    open : {
-      url : 'http://localhost:9000',
-    }
+    root : 'build'
   },
 
   // ----- CSS ----- //
