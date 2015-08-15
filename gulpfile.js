@@ -9,6 +9,7 @@
 //   `gulp build`
 //   `gulp compile:coffee`
 //   `gulp compile:sass`
+//   `gulp connect`
 //   `gulp icons`
 //   `gulp lint:coffee`
 //   `gulp minify:css`
@@ -27,6 +28,7 @@
 // gulp-coffee       : Compile CoffeeScript files
 // gulp-coffeelint   : Lint your CoffeeScript
 // gulp-concat       : Concatenate files
+// gulp-connect      : Gulp plugin to run a webserver (with LiveReload)
 // gulp-csscss       : CSS redundancy analyzer
 // gulp-jshint       : JavaScript code quality tool
 // gulp-load-plugins : Automatically load Gulp plugins
@@ -63,7 +65,7 @@ var options = {
   // ----- Build ----- //
 
   build : {
-    tasks       : [ 'minify:css', 'minify:js' ],
+    tasks       : [ 'minify:css', 'minify:js', 'html' ],
     destination : 'build/'
   },
 
@@ -75,12 +77,32 @@ var options = {
     destination : 'source/javascripts'
   },
 
+  // ----- Connect ----- //
+
+  connect : {
+    port : 9000,
+    base : 'http://localhost',
+    root : 'build',
+    open : {
+      url : 'http://localhost:9000',
+    }
+  },
+
   // ----- CSS ----- //
 
   css : {
     files       : 'source/stylesheets/*.css',
     file        : 'source/stylesheets/application.css',
     destination : 'source/stylesheets'
+  },
+
+  // ----- HTML ----- //
+
+  html : {
+    files           : 'source/*.html',
+    file            : 'source/index.html',
+    destination     : 'build',
+    destinationFile : 'build/index.html'
   },
 
   // ----- JavaScript ----- //
@@ -105,28 +127,13 @@ var options = {
     destination : 'source/stylesheets'
   },
 
-  // ----- Watch ----- //
-
-  watch : {
-    run : function() {
-      return [ options.coffee.files, options.sass.files ];
-    },
-    tasks : [ [ 'compile:sass', 'compile:coffee', 'minify:css' ], 'build' ]
-  }
-
 };
 
 // -------------------------------------
 //   Task: Default
 // -------------------------------------
 
-gulp.task( 'default', function() {
-
-  plugins.watch( options.watch.run(), function( files ) {
-    run( options.watch.tasks[0], options.watch.tasks[1] );
-  } );
-
-} );
+gulp.task( 'default', [ 'build', 'connect', 'watch' ] );
 
 // -------------------------------------
 //   Task: Build
@@ -172,6 +179,33 @@ gulp.task( 'compile:sass', function () {
 } );
 
 // -------------------------------------
+//   Task: Connect
+// -------------------------------------
+
+gulp.task( 'connect', function() {
+
+  plugins.connect.server( {
+    root       : [ options.connect.root ],
+    port       : options.connect.port,
+    base       : options.connect.base,
+    livereload : true
+  } );
+
+});
+
+// -------------------------------------
+//   Task: HTML
+// -------------------------------------
+
+gulp.task( 'html', function() {
+
+  gulp.src( options.html.files )
+    .pipe( gulp.dest( options.html.destination ) )
+    .pipe( plugins.connect.reload() );
+
+});
+
+// -------------------------------------
 //   Task: Icons
 // -------------------------------------
 
@@ -207,7 +241,8 @@ gulp.task( 'minify:css', function () {
     .pipe( plugins.plumber() )
     .pipe( plugins.cssmin( { advanced: false } ) )
     .pipe( plugins.rename( { suffix: '.min' } ) )
-    .pipe( gulp.dest( options.build.destination ) );
+    .pipe( gulp.dest( options.build.destination ) )
+    .pipe( plugins.connect.reload() );
 
 } );
 
@@ -221,7 +256,8 @@ gulp.task( 'minify:js', function () {
     .pipe( plugins.plumber() )
     .pipe( plugins.uglify() )
     .pipe( plugins.rename( { suffix: '.min' } ) )
-    .pipe( gulp.dest( options.build.destination ) );
+    .pipe( gulp.dest( options.build.destination ) )
+    .pipe( plugins.connect.reload() );
 
 } );
 
@@ -251,5 +287,17 @@ gulp.task( 'test:js', function() {
     .pipe( plugins.plumber() )
     .pipe( plugins.jshint() )
     .pipe( plugins.jshint.reporter( 'default' ) )
+
+});
+
+// -------------------------------------
+//   Task: Watch
+// -------------------------------------
+
+gulp.task( 'watch', function() {
+
+  gulp.watch( options.html.files, [ 'html' ] );
+  gulp.watch( options.coffee.files, [ 'compile:coffee', 'minify:js' ] );
+  gulp.watch( options.sass.files, [ 'compile:sass', 'minify:css' ] );
 
 });
