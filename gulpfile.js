@@ -13,6 +13,7 @@
 //   `gulp icons`
 //   `gulp images`
 //   `gulp lint:coffee`
+//   `gulp lint:sass`
 //   `gulp minify:css`
 //   `gulp minify:js`
 //   `gulp test:css`
@@ -38,6 +39,7 @@
 // gulp-plumber      : Prevent pipe breaking from errors
 // gulp-rename       : Rename files
 // gulp-sass         : Compile Sass
+// gulp-sass-lint    : Lint Sass
 // gulp-svgmin       : Minify SVG files
 // gulp-svgstore     : Combine SVG files into one
 // gulp-uglify       : Minify JavaScript with UglifyJS
@@ -52,7 +54,8 @@ var run     = require( 'run-sequence' );
 var plugins = require( 'gulp-load-plugins' )( {
 
   rename : {
-    'gulp-minify-css': 'cssmin'
+    'gulp-minify-css' : 'cssmin',
+    'gulp-sass-lint'  : 'sasslint'
   }
 
 } );
@@ -270,6 +273,20 @@ gulp.task( 'lint:coffee', function () {
     .pipe( plugins.plumber() )
     .pipe( plugins.coffeelint() )
     .pipe( plugins.coffeelint.reporter() )
+
+} );
+
+// -------------------------------------
+//   Task: Lint Sass
+// -------------------------------------
+
+gulp.task( 'lint:sass', function() {
+
+  gulp.src( options.sass.files )
+    .pipe( plugins.plumber() )
+    .pipe( plugins.sasslint() )
+    .pipe( plugins.sasslint.format() )
+    .pipe( plugins.sasslint.failOnError() );
 
 } );
 
