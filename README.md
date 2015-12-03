@@ -72,6 +72,12 @@ $ gulp lint:coffee
 > Lints CoffeeScript files.
 
 ```
+$ gulp lint:sass
+```
+
+> Lints Sass files.
+
+```
 $ gulp minify:css
 ```
 
