@@ -2,19 +2,20 @@ files:
   include: '**/*.s+(a|c)ss'
 rules:
   border-zero: 1
+  brace-style: 0
   empty-line-between-blocks:
-    - 2
+    - 1
     -
       allow-single-line-rulesets: false
-  extends-before-declarations: 2
+  extends-before-declarations: 0
   extends-before-mixins: 2
   final-newline:
-    - 1
+    - 0
     -
       include: false
   hex-length: 1
   hex-notation: 2
-  indentation: 2
+  indentation: 0
   leading-zero:
     - 2
     -
@@ -48,11 +49,15 @@ rules:
       order: 'alphabetical'
   quotes: 2
   shorthand-values: 1
-  single-line-per-selector: 1
+  single-line-per-selector: 0
   space-after-colon: 2
   space-after-comma: 2
   space-before-bang: 2
   space-before-colon: 2
   space-between-parens: 2
   url-quotes: 1
+  variable-name-format:
+    - 2
+    -
+      convention: ^[^_]*
   zero-unit: 1
